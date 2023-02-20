@@ -1,0 +1,21 @@
+html
+	head
+		title New User
+		style
+			include ../../styles/bac.css
+		body(onclick = "init()")
+		include ../partials/header
+
+		div#main
+			h3 Enter your username and password to resgister:
+			br
+			p New User's Name:
+				input(type="text", name="username", id="username")
+			p New User's Password:
+				input(type="password", name="password",id="password")
+			input(type="submit",value = "Register", id = "register")
+
+
+		include ../partials/footer
+		script
+			include ../../scripts/newuser.js

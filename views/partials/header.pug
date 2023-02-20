@@ -1,0 +1,36 @@
+div#header
+	a(href="/") Home
+	|
+	|
+	|
+	|
+	a(href="/users") Users
+	|
+	|
+	|
+	|
+	if(!auth)
+		a(href="/") Log in
+	|
+	|
+	|
+	|
+	if(!auth)
+		a(href="/register") Register
+	|
+	|
+	|
+	|
+	if(auth)
+		a(href="/orders") To order
+	|
+	|
+	|
+	if(auth)
+		a(href="/users/"+uid) View your profile
+	|
+	|
+	|
+	|
+	if(auth)
+		a(href="/logout") Logout

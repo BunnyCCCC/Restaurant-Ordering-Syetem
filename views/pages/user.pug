@@ -1,0 +1,56 @@
+html
+  head
+    title Profile #{user.username} Page
+    style
+      include ../../styles/bac.css
+    body(onload="init()")
+    include ../partials/header
+
+
+    div#main
+    if(auth)
+      h1 Hello #{u},  this is #{user.username}'s Page
+    else
+      h1 Hello,  this is #{user.username}'s Page
+    br
+    br
+    div(id = "curuser",value = user._id)
+      br
+      if(auth && user.username==u)
+        h3 Select Profile Privacy Mode:
+        br
+        if(!user.privacy)
+          input(type = "radio",id="public",name="mode",value="false",checked="checked")
+          label(style="font-style:italic") Public
+          br
+          input(type = "radio",id="private",name="mode",value="true")
+          label(style="font-style:italic") Private
+          br
+          input(type="submit", name="update",id = "update", value="Save Change")
+        else
+          input(type = "radio",id="public",name="mode",value="false")
+          label(style="font-style:italic") Public
+          br
+          input(type = "radio",id="private",name="mode",value="true",checked="checked")
+          label(style="font-style:italic") Private
+          br
+          input(type="submit", name="update",id = "update", value="Save Change")
+
+
+      br
+      br
+      div(id = "orders")
+        h2 Order List:
+        - let i=1
+          h10
+          for o in order
+            a(href="/orders/"+o._id._id) Order #{i} with OrderID: #{o._id._id}
+            - i++
+            br
+
+
+
+
+    include ../partials/footer
+    script
+      include ../../scripts/updateuser.js

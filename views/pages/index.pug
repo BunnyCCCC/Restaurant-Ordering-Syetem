@@ -1,0 +1,30 @@
+html
+	head
+		title Home Page
+		style
+			include ../../styles/bac.css
+	body
+		include ../partials/header
+
+
+		div#main
+
+			h1 Welcome to the Order Management System!
+
+			if (!auth)
+				h2 Please log in!
+				div#login
+					form(action='/login', method='POST')
+						p
+							| Username:
+							input(type='text', name='username',required)
+							br
+							| Password:
+							input(type='password', name='password',required)
+						input(type='submit', value='Login')
+
+
+
+
+
+		include ../partials/footer

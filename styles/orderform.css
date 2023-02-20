@@ -1,0 +1,20 @@
+body {
+    background-image: url('../images/menubackground.jpg');
+}
+
+.column {
+  float: left;
+}
+
+#left{
+  float: left;
+  width: 10%;
+}
+
+#right {
+  width: 25%;
+}
+
+#middle {
+  width: 65%;
+}

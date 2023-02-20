@@ -1,0 +1,33 @@
+html
+  head
+    title Order #{order._id} Page
+    style
+      include ../../styles/bac.css
+    body
+    include ../partials/header
+
+
+    div#main
+      h1 Order#: #{order._id}
+      h4 Restaurant Name: #{order.resName}
+      h4 Placed by Customer #{order.username}
+
+      br
+      br
+      div(id = "order-content")
+        h3 Order Detail:
+        for item in order.order
+          h10 #{item.name} x qty: #{item.qty}
+          br
+        br
+        br
+        h4 Subtotal: #{order.subtotal}
+        h9 Tax: #{order.tax}
+        br
+        h9 Delivery fee: #{order.fee}
+        br
+        h3 Total: #{order.total}
+
+
+
+    include ../partials/footer

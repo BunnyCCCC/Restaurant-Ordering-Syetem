@@ -1,0 +1,21 @@
+html
+	head
+		title Users Page
+		style
+			include ../../styles/bac.css
+	body
+		include ../partials/header
+
+
+		div#main
+			h1 List of Users
+			br
+			each user in users
+				if(!user.privacy || (u===user.username && auth))
+					a(href="/users/"+ user._id) #{user.username}
+					br
+
+
+
+
+		include ../partials/footer
