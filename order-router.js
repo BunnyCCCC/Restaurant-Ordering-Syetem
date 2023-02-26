@@ -9,11 +9,13 @@ const mongoose = require("mongoose");
 const ObjectId= require('mongoose').Types.ObjectId
 const Order = require("./order-schema");
 const User = require("./user-schema");
+const Restaurant = require("./restaurant-schema");
 const express = require('express');
 let router = express.Router();
+let restaurants;
 
 //get and post request
-router.get("/", statusCheck,loadOrderform);
+router.get("/", statusCheck,loadRestaurants,loadOrderform);
 router.get("/:oid", sendSingleOrder);
 router.post("/", express.json(), receivedOrder);
 
@@ -62,6 +64,7 @@ router.param("oid", function(req, res, next, value){
 	});
 });
 
+
 //the status check if an user tries to place an order but not loggedin.
 function statusCheck(req,res,next){
 	if(req.session.loggedin==false){
@@ -70,14 +73,32 @@ function statusCheck(req,res,next){
 		next();
 	}
 }
+
+//laod the restaurants data
+function loadRestaurants(req,res,next){
+	Restaurant.find({})
+	.exec(function(err, results){
+		if(err){
+			res.status(500).send("Error reading restaurants.");
+			console.log(err);
+			return;
+		}
+		res.restaurants = results;
+		//console.log(res.restaurants);
+		next();
+	});
+}
+
 //load the orderform to loggedin users.
 function loadOrderform(req,res,next){
 	res.format({
-		"text/html": () => {res.render("pages/orderform",{auth:req.session.loggedin, u:req.session.username, uid:req.session.uid})},
-		"application/json": () => {res.status(200).json(res.users)}
+		"text/html": () => {res.render("pages/orderform",{restaurants:res.restaurants,auth:req.session.loggedin, u:req.session.username, uid:req.session.uid})},
+		"application/json": () => {res.status(200).json(res.restaurants)}
 	});
 	next();
+	return;
 }
+
 
 //Creates a order and add it to the database
 function receivedOrder(req, res, next){

@@ -1,8 +1,8 @@
 
-/***********************************************************/
-/* This is server side user-schema.js file  		           */
-/* which sets up Schema of collection users in db a4       */
-/***********************************************************/
+/*************************************************************************/
+/* This is server side user-schema.js file  		                         */
+/* which sets up Schema of collection users in db myorderingsystem       */
+/*************************************************************************/
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;

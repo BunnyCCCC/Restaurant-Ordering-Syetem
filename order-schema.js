@@ -1,8 +1,8 @@
 
-/***********************************************************/
-/* This is server side order-schema.js file  		           */
-/* which sets up Schema of collection orders in db a4      */
-/***********************************************************/
+/*************************************************************************/
+/* This is server side order-schema.js file  		                         */
+/* which sets up Schema of collection orders in db myorderingsystem      */
+/*************************************************************************/
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;

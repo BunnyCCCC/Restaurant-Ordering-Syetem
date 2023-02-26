@@ -11,8 +11,8 @@ function init(){
 
 //function to send json to server in order to update user's info
 function sendUpdate(){
-	let xhttp = new XMLHttpRequest();
 	let userId = document.getElementById("curuser").getAttribute("value");
+	let xhttp = new XMLHttpRequest();
 	let privacy = getMode();
 		console.log(privacy);
 		update["_id"] = userId;

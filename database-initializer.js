@@ -1,10 +1,12 @@
 
-/***************************************************/
-/* This is the database-initializer.js             */
-/* which initialize the a4 database                */
-/***************************************************/
+/*****************************************************************/
+/* This is the database-initializer.js                           */
+/* which initialize the myorderingsystem database                */
+/* with default users and default restaurants                    */
+/*****************************************************************/
 
 
+//let restaurants = {"Aragorn's Orc BBQ": aragorn, "Lembas by Legolas": legolas, "Frodo's Flapjacks": frodo};
 let userNames = ["winnifred", "lorene", "cyril", "vella", "erich", "pedro", "madaline", "leoma", "merrill",  "jacquie"];
 let users = [];
 
@@ -16,11 +18,13 @@ userNames.forEach(name =>{
 	users.push(u);
 });
 
+let restaurantMenus = require('./restaurants');
+let restaurants = restaurantMenus.restaurantMenus;
 let mongo = require('mongodb');
 let MongoClient = mongo.MongoClient;
 let db;
 
-MongoClient.connect("mongodb://127.0.0.1:27017/", { useNewUrlParser: true },  function(err, client) {
+MongoClient.connect("mongodb://127.0.0.1:27017/", { useNewUrlParser: true }, { useUnifiedTopology: true }, function(err, client) {
   if(err) throw err;
 
   db = client.db('myorderingsystem');
@@ -33,8 +37,16 @@ MongoClient.connect("mongodb://127.0.0.1:27017/", { useNewUrlParser: true },  fu
 			}
 
 			console.log(result.insertedCount + " users successfully added (should be 10).");
-			client.close();
+			//client.close();
 		});
+			db.collection("restaurants").insertMany(restaurants, function(err, result){
+			 if(err){
+				 throw err;
+			 }
+
+			 console.log(result.insertedCount + " restaurant successfully added (should be 3).");
+			 client.close();
+		 });
 		return;
 	 }
 
@@ -56,8 +68,15 @@ MongoClient.connect("mongodb://127.0.0.1:27017/", { useNewUrlParser: true },  fu
 					}
 
 					console.log(result.insertedCount + " users successfully added (should be 10).");
-					client.close();
 				});
+				db.collection("restaurants").insertMany(restaurants, function(err, result){
+				 if(err){
+					 throw err;
+				 }
+
+				 console.log(result.insertedCount + " restaurant successfully added (should be 3).");
+				 client.close();
+			 });
 			}
 		});
 	 });

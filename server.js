@@ -13,7 +13,11 @@ const store = new MongoDBStore({
   uri: 'mongodb://127.0.0.1:27017/tokens',
   collection: 'sessions'
 });
-app.use(session({ secret: 'topsecret', store: store }))
+app.use(session({
+  secret: 'topsecret',
+  store: store,
+  resave: false,
+  saveUninitialized: false }));
 //use pug template engine
 app.set("view engine", "pug");
 app.use(express.urlencoded({extended: true}));
