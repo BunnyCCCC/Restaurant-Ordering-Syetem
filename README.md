@@ -18,6 +18,8 @@
     11.register-router.js
     12.user-schema.js
     13.users-router.js
+    14.restaurant.js
+    15.restaurant-schema.js
 
 
 ## Instruction:
