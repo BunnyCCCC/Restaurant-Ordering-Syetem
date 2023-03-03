@@ -82,8 +82,12 @@ app.get("/logout", function(req, res, next){
 })
 
 
+//settings to adapt to deprecations
+mongoose.set('useNewUrlParser',true);
+mongoose.set('useUnifiedTopology',true);
+mongoose.set('useCreateIndex',true);
 //Connect to database a4 which was initialized from database-initializer.js
-mongoose.connect("mongodb://127.0.0.1/myorderingsystem", { useUnifiedTopology: true }, function(err, client) {
+mongoose.connect("mongodb://127.0.0.1/myorderingsystem", function(err, client) {
 	if (err) {
 		console.log("Error in connecting to database");
 		console.log(err);
